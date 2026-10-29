@@ -8,7 +8,7 @@ Claude Code plugins that help AI agents build Flutter apps.
 
 https://github.com/user-attachments/assets/9cc550e5-93ac-4c45-bd2c-08359e1441ce
 
-The video shows what the plugin does for you as a Flutter developer: your agent learns your stack, deprecated and team-banned APIs are caught right after each edit, problems go back to the agent until `dart analyze` is clean, and screens are checked for overflow on 6 screen sizes. Can't play it here? [Download the MP4](docs/demo.mp4).
+The video shows what the plugin does for you as a Flutter developer: your agent learns your stack, deprecated and team-banned APIs are caught right after each edit, problems go back to the agent until `dart analyze` is clean, and screens are checked for overflow on 6 screen sizes. Can't play it here? [Watch on YouTube](https://youtu.be/GjoXf3EQJCU) or [download the MP4](docs/demo.mp4).
 
 ## flutter-agent-toolkit
 

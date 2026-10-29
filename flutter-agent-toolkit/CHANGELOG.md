@@ -1,6 +1,6 @@
 ## 0.3.1
 
-- README: 90-second demo video and GIF preview.
+- README: 90-second demo video, also on YouTube (https://youtu.be/GjoXf3EQJCU).
 
 ## 0.3.0
 
