@@ -1,6 +1,11 @@
+## 0.3.2
+
+- README: demo video on YouTube (https://youtu.be/GjoXf3EQJCU) with a thumbnail preview.
+
 ## 0.3.1
 
-- README: 90-second demo video, also on YouTube (https://youtu.be/GjoXf3EQJCU).
+- README: 90-second demo video and GIF preview.
+- Fixed core lint findings; added `analysis_options.yaml`.
 
 ## 0.3.0
 
