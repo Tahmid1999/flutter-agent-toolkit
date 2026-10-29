@@ -1,6 +1,12 @@
 # Flutter Agent Plugins
 
+[![pub package](https://img.shields.io/pub/v/flutter_agent_toolkit.svg)](https://pub.dev/packages/flutter_agent_toolkit)
+
 Claude Code plugins that help AI agents build Flutter apps.
+
+[![Watch the 90-second demo](docs/demo.gif)](docs/demo.mp4)
+
+▶ **[Watch the full 90-second video with sound](docs/demo.mp4)**
 
 ## flutter-agent-toolkit
 

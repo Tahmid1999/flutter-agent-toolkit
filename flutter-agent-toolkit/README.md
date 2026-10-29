@@ -4,6 +4,10 @@ A Claude Code plugin that makes AI agents build Flutter apps the way a senior Fl
 
 Install it once. It works automatically in every Flutter project, and stays silent everywhere else.
 
+[![Watch the 90-second demo](https://raw.githubusercontent.com/Tahmid1999/flutter-agent-toolkit/main/docs/demo.gif)](https://github.com/Tahmid1999/flutter-agent-toolkit/blob/main/docs/demo.mp4)
+
+▶ **[Watch the full 90-second video with sound](https://github.com/Tahmid1999/flutter-agent-toolkit/blob/main/docs/demo.mp4)**
+
 ## What you get
 
 | | What happens |

@@ -1,3 +1,7 @@
+## 0.3.1
+
+- README: 90-second demo video and GIF preview.
+
 ## 0.3.0
 
 - Published on pub.dev as `flutter_agent_toolkit`.

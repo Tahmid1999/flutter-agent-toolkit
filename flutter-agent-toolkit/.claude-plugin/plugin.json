@@ -1,6 +1,6 @@
 {
   "name": "flutter-agent-toolkit",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Makes AI agents build Flutter apps like a senior dev: knows your stack, modern APIs, analyzer-clean code, auto build_runner, UI screenshots at every screen size, and native build fixes.",
   "author": {
     "name": "Tahmid Alavi Ishmam",
