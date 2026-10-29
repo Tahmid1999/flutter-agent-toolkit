@@ -1,0 +1,13 @@
+{
+  "name": "flutter-agent-toolkit",
+  "version": "0.2.0",
+  "description": "Makes AI agents build Flutter apps like a senior dev: knows your stack, modern APIs, analyzer-clean code, auto build_runner, UI screenshots at every screen size, and native build fixes.",
+  "author": {
+    "name": "Tahmid Alavi Ishmam",
+    "url": "https://github.com/Tahmid1999"
+  },
+  "homepage": "https://github.com/Tahmid1999/flutter-agent-toolkit",
+  "repository": "https://github.com/Tahmid1999/flutter-agent-toolkit",
+  "license": "MIT",
+  "keywords": ["flutter", "dart", "mobile", "gradle", "cocoapods", "lint"]
+}

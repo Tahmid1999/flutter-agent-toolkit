@@ -1,0 +1,4 @@
+.dart_tool/
+*.exe
+.DS_Store
+Thumbs.db

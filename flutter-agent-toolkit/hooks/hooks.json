@@ -1,0 +1,43 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "exe=\"${CLAUDE_PLUGIN_DATA}/toolkit.exe\"; if [ -n \"${CLAUDE_PLUGIN_DATA}\" ] && [ -x \"$exe\" ]; then \"$exe\" session-start; elif command -v dart >/dev/null 2>&1; then dart \"${CLAUDE_PLUGIN_ROOT}/hooks/toolkit.dart\" session-start; elif [ -f pubspec.yaml ]; then echo \"flutter-agent-toolkit: 'dart' is not on PATH, so Flutter checks are off. Tell the user to add their Flutter SDK bin folder to PATH.\"; fi",
+            "timeout": 180,
+            "statusMessage": "Flutter toolkit: detecting project..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "exe=\"${CLAUDE_PLUGIN_DATA}/toolkit.exe\"; if [ -n \"${CLAUDE_PLUGIN_DATA}\" ] && [ -x \"$exe\" ]; then \"$exe\" post-edit; elif command -v dart >/dev/null 2>&1; then dart \"${CLAUDE_PLUGIN_ROOT}/hooks/toolkit.dart\" post-edit; fi",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "exe=\"${CLAUDE_PLUGIN_DATA}/toolkit.exe\"; if [ -n \"${CLAUDE_PLUGIN_DATA}\" ] && [ -x \"$exe\" ]; then \"$exe\" stop; elif command -v dart >/dev/null 2>&1; then dart \"${CLAUDE_PLUGIN_ROOT}/hooks/toolkit.dart\" stop; fi",
+            "timeout": 600,
+            "statusMessage": "Flutter toolkit: checking changed Dart files..."
+          }
+        ]
+      }
+    ]
+  }
+}
