@@ -33,7 +33,12 @@ The template [flutter_verify_test.dart](flutter_verify_test.dart) is in this ski
    Each shot prints `FLUTTER_VERIFY <screen>/<shot>: OK` or the layout error, for example `A RenderFlex overflowed by 42 pixels on the right.`
    If the test does not compile or the screen throws, fix the test setup (fakes, providers) first.
 
-4. **Look at every screenshot** in `test/flutter_verify/goldens/<screen>/` with the Read tool. Check:
+4. **Look at the screenshots** in `test/flutter_verify/goldens/<screen>/` with the Read tool. Screenshots cost tokens, so read:
+   - every shot whose `FLUTTER_VERIFY` line shows an error, and
+   - `phone` and `desktop` always (most layout issues show there).
+   Read the others (`phone_small`, `phone_dark`, `phone_large_text`, `tablet`) on the first run of a new screen, or when the user asks for a full check. After a fix, re-read only the shots that had problems.
+
+   Check:
    - Yellow/black overflow stripes, clipped or cut-off text
    - `phone_small` (360×640): everything fits or scrolls; no keyboard-style overflow on forms
    - `phone_large_text` (1.5× text): text wraps, buttons grow, nothing overlaps
@@ -54,7 +59,7 @@ The template [flutter_verify_test.dart](flutter_verify_test.dart) is in this ski
    ...
    ```
 
-7. **Clean up:** delete `test/flutter_verify/` unless the user wants to keep the screenshots as golden tests. If they keep them, rename the folder, remove the `print` line, and tell them to run `flutter test` normally (without `--update-goldens`) to catch regressions.
+7. **Clean up:** delete `test/flutter_verify/` unless the user wants to keep the screenshots as golden tests. If they keep them, rename the folder, remove the `debugPrint` line, and tell them to run `flutter test` normally (without `--update-goldens`) to catch regressions.
 
 ## Known limits of test rendering
 

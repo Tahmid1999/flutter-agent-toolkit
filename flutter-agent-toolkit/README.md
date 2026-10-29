@@ -79,6 +79,12 @@ Everything runs locally. The plugin sends nothing anywhere.
 
 ## Changelog
 
+**0.2.1** (fixes from the first live agent-session test)
+- Hook messages are short: the launcher moved to `hooks/run.sh`
+- `/flutter-init` marks recommended vs optional rules and writes a folder-structure template for fresh apps
+- `flutter-verify` reads fewer screenshots (failing shots plus phone and desktop), so it uses fewer tokens
+- The verify template uses `debugPrint`, so team `print` rules don't flag it
+
 **0.2.0**
 - Project autodetect at session start
 - Per-edit check is now instant; analysis runs once when the agent finishes, with up to 3 automatic fix rounds

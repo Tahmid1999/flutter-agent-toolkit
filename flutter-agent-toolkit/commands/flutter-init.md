@@ -25,19 +25,24 @@ Set up flutter-agent-toolkit for this Flutter project. Keep it quick and ask at 
        exclude: [test/, tool/]
    ```
 
-   Rule ideas by stack (suggest only those that fit):
-   - Any app: `\bprint\(` → use a logger; `Colors\.\w+` in `lib/features/` → use `Theme.of(context).colorScheme`
-   - go_router: `Navigator\.(of\(context\)\.)?push(Named)?\(` → use `context.push` / `context.go`
-   - Riverpod: `\bChangeNotifierProvider\b` → use Notifier / AsyncNotifier
-   - Bloc: `\bsetState\(` in `lib/features/` → move state into a Cubit/Bloc
-   - dio: `\bhttp\.(get|post|put|delete)\(` → use the shared Dio client
-   - gen-l10n: `Text\('` in `lib/features/` → use `AppLocalizations.of(context)` strings
+   Rule ideas by stack (suggest only those that fit). **Recommended** rules are on by default; optional ones need the user's yes:
+   - Any app: `\bprint\(` → use a logger (**recommended**, exclude `test/` and `tool/`); `Colors\.\w+` in `lib/features/` → use `Theme.of(context).colorScheme` (optional: strict, flags every hardcoded color)
+   - go_router: `Navigator\.(of\(context\)\.)?push(Named)?\(` → use `context.push` / `context.go` (**recommended**)
+   - Riverpod: `\bChangeNotifierProvider\b` → use Notifier / AsyncNotifier (**recommended**)
+   - Bloc: `\bsetState\(` in `lib/features/` → move state into a Cubit/Bloc (optional)
+   - dio: `\bhttp\.(get|post|put|delete)\(` → use the shared Dio client (**recommended**)
+   - gen-l10n: `Text\('` in `lib/features/` → use `AppLocalizations.of(context)` strings (optional)
 
-   Show the user the proposed rules and ask once which to keep before writing the file.
+   Show the proposed rules, marking recommended vs optional, and ask once which to keep. If the user says "defaults" or does not care, write only the recommended ones.
 
 3. **Add a "Flutter conventions" section to `CLAUDE.md`** (create the file if missing; update the section if it exists, never duplicate). Keep it under 30 lines:
    - Stack (one line per category) and "do not add competing libraries"
-   - Folder structure and where new features go
+   - Folder structure and where new features go. Describe the project's existing structure. If it has none yet (fresh app), use the modern-flutter skill's feature-first layout:
+     ```
+     lib/app/            MaterialApp, router, theme
+     lib/core/           shared widgets, utils, constants
+     lib/features/<f>/   data/ (repositories, DTOs), domain/ (models, logic), presentation/ (screens, widgets, state)
+     ```
    - Commands: run, test, build_runner, gen-l10n, flavors if any
    - Pointers: "Use the modern-flutter skill. Run /flutter-check before finishing big changes. Use flutter-verify after UI changes."
 

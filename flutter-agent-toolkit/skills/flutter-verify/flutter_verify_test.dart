@@ -89,8 +89,7 @@ void main() {
       final exception = tester.takeException();
       if (exception != null) errors.add('$exception'.split('\n').first);
       final status = errors.isEmpty ? 'OK' : errors.toSet().join(' | ');
-      // ignore: avoid_print
-      print('FLUTTER_VERIFY $screenName/${shot.name}: $status');
+      debugPrint('FLUTTER_VERIFY $screenName/${shot.name}: $status');
       expect(errors, isEmpty, reason: 'Layout errors on ${shot.name}');
     });
   }
