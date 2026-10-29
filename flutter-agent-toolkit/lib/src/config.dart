@@ -92,8 +92,9 @@ class ToolkitConfig {
         case 'max_fix_rounds':
           if (value is int && value >= 0) maxFixRounds = value;
         case 'ignore_codes':
-          if (value is List)
+          if (value is List) {
             ignoreCodes.addAll(value.map((v) => '$v'.toLowerCase()));
+          }
         case 'banned_apis':
           if (value is List) value.whereType<Map>().forEach(_addBanned);
         default:

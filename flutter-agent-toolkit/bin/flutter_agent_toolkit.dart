@@ -91,8 +91,9 @@ Done. Start a new Claude Code session in your Flutter project, then run
 Future<int> _check(List<String> args) async {
   final analyze = !args.contains('--no-analyze');
   final root = findPubspecRoot(_dir(args));
-  if (root == null)
+  if (root == null) {
     return _fail('No pubspec.yaml found at or above ${_dir(args)}.');
+  }
   final config = ToolkitConfig.load(root);
   for (final error in config.errors) {
     stderr.writeln('${ToolkitConfig.fileName}: $error');
@@ -143,8 +144,9 @@ Future<int> _check(List<String> args) async {
 
 int _init(List<String> args) {
   final root = findPubspecRoot(_dir(args));
-  if (root == null)
+  if (root == null) {
     return _fail('No pubspec.yaml found at or above ${_dir(args)}.');
+  }
   final file = File('$root${Platform.pathSeparator}${ToolkitConfig.fileName}');
   if (file.existsSync()) {
     stdout

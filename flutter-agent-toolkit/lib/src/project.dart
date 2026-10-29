@@ -231,10 +231,11 @@ class ProjectInfo {
         '${featureFirst ? ' (feature-first)' : ''}',
       );
     }
-    if (isWorkspace)
+    if (isWorkspace) {
       b.writeln(
         '- Monorepo / pub workspace: run commands in the right package.',
       );
+    }
     if (config.exists) {
       b.writeln(
         '- Team rules (${ToolkitConfig.fileName}): strictness '
@@ -273,8 +274,9 @@ class ProjectInfo {
       }
     }
     final legacy = File(join(root, 'version'));
-    if (flutter == null && legacy.existsSync())
+    if (flutter == null && legacy.existsSync()) {
       flutter = legacy.readAsStringSync().trim();
+    }
     final dartFile = File(join(root, 'bin/cache/dart-sdk/version'));
     final dart =
         dartFile.existsSync() ? dartFile.readAsStringSync().trim() : null;
