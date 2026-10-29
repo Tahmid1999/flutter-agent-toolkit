@@ -6,16 +6,18 @@
 //   stop           When the agent finishes: build_runner if needed, one
 //                  `dart analyze` over changed files, send problems back,
 //                  format, and show a summary.
+// ignore_for_file: avoid_relative_lib_imports
+
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
-import 'src/analyzer.dart';
-import 'src/config.dart';
-import 'src/project.dart';
-import 'src/rules.dart';
-import 'src/session.dart';
-import 'src/util.dart';
+import '../lib/src/analyzer.dart';
+import '../lib/src/config.dart';
+import '../lib/src/project.dart';
+import '../lib/src/rules.dart';
+import '../lib/src/session.dart';
+import '../lib/src/util.dart';
 
 Future<void> main(List<String> args) async {
   final payload = await readPayload();
@@ -172,9 +174,7 @@ Future<void> stop(Map<String, dynamic> payload) async {
           continue;
         }
         analyzerCount++;
-        report
-            .putIfAbsent(display(issue.path), () => [])
-            .add(
+        report.putIfAbsent(display(issue.path), () => []).add(
               '- [${issue.severity.toLowerCase()}] line ${issue.line}: '
               '${issue.message} (${issue.code})',
             );
@@ -197,12 +197,10 @@ Future<void> stop(Map<String, dynamic> payload) async {
     stdout.writeln(
       jsonEncode({
         'decision': 'block',
-        'reason':
-            'flutter-agent-toolkit found '
+        'reason': 'flutter-agent-toolkit found '
             '${plural(problemCount, 'problem')} in files you changed. '
             'Fix them, then finish.\n\n$details',
-        'systemMessage':
-            'Flutter toolkit: ${plural(problemCount, 'problem')} '
+        'systemMessage': 'Flutter toolkit: ${plural(problemCount, 'problem')} '
             'in changed files, sent back to Claude '
             '(round ${log.rounds}/$maxRounds)',
       }),
@@ -226,8 +224,7 @@ Future<void> stop(Map<String, dynamic> payload) async {
     final firstLines = LineSplitter.split(details).take(12).join('\n');
     stdout.writeln(
       jsonEncode({
-        'systemMessage':
-            '⚠ Flutter toolkit: ${plural(problemCount, 'problem')} '
+        'systemMessage': '⚠ Flutter toolkit: ${plural(problemCount, 'problem')} '
             'left in changed files'
             '${maxRounds > 0 ? ' after $maxRounds fix rounds' : ''}:\n$firstLines',
       }),
@@ -269,13 +266,14 @@ Future<void> ensureCompiled() async {
   _deleteOldExes(data);
   final hooks = Directory(join(pluginRoot(), 'hooks'));
   if (!hooks.existsSync()) return;
-  final sources =
-      hooks
-          .listSync(recursive: true)
-          .whereType<File>()
-          .where((f) => f.path.endsWith('.dart'))
-          .toList()
-        ..sort((a, b) => a.path.compareTo(b.path));
+  final sources = [
+    for (final dir in [hooks, Directory(join(pluginRoot(), 'lib'))])
+      if (dir.existsSync())
+        ...dir
+            .listSync(recursive: true)
+            .whereType<File>()
+            .where((f) => f.path.endsWith('.dart')),
+  ]..sort((a, b) => a.path.compareTo(b.path));
   var hash = 0xcbf29ce484222325; // FNV-1a
   for (final source in sources) {
     for (final byte in source.readAsBytesSync()) {

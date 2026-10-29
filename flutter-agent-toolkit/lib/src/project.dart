@@ -68,8 +68,7 @@ Set<String> readDependencies(String pubspec) {
   for (final line in LineSplitter.split(pubspec)) {
     if (line.trim().isEmpty || line.trimLeft().startsWith('#')) continue;
     if (!line.startsWith(' ')) {
-      inDeps =
-          line.startsWith('dependencies:') ||
+      inDeps = line.startsWith('dependencies:') ||
           line.startsWith('dev_dependencies:');
       continue;
     }
@@ -148,7 +147,7 @@ class ProjectInfo {
     final pubspec = File(join(root, 'pubspec.yaml')).readAsStringSync();
     info.name =
         RegExp(r'^name:\s*(\S+)', multiLine: true).firstMatch(pubspec)?[1] ??
-        '';
+            '';
     final deps = readDependencies(pubspec);
     for (final MapEntry(:key, :value) in stackCategories.entries) {
       final hits = value.where(deps.contains).toList();
@@ -157,7 +156,7 @@ class ProjectInfo {
     info.usesBuildRunner = deps.contains('build_runner');
     info.isWorkspace =
         RegExp(r'^workspace:', multiLine: true).hasMatch(pubspec) ||
-        File(join(root, 'melos.yaml')).existsSync();
+            File(join(root, 'melos.yaml')).existsSync();
     for (final p in ['android', 'ios', 'web', 'macos', 'windows', 'linux']) {
       if (Directory(join(root, p)).existsSync()) info.platforms.add(p);
     }
@@ -242,9 +241,8 @@ class ProjectInfo {
         '${config.strictness.name}.',
       );
       for (final rule in config.bannedApis) {
-        final scope = rule.paths.isEmpty
-            ? ''
-            : ' (in ${rule.paths.join(', ')})';
+        final scope =
+            rule.paths.isEmpty ? '' : ' (in ${rule.paths.join(', ')})';
         b.writeln('  - Banned `${rule.source}`$scope: ${rule.message}');
       }
       for (final error in config.errors) {
@@ -268,10 +266,8 @@ class ProjectInfo {
     final versionJson = File(join(root, 'bin/cache/flutter.version.json'));
     if (versionJson.existsSync()) {
       try {
-        flutter =
-            (jsonDecode(versionJson.readAsStringSync())
-                    as Map)['frameworkVersion']
-                as String?;
+        flutter = (jsonDecode(versionJson.readAsStringSync())
+            as Map)['frameworkVersion'] as String?;
       } on Object {
         flutter = null;
       }
@@ -280,9 +276,8 @@ class ProjectInfo {
     if (flutter == null && legacy.existsSync())
       flutter = legacy.readAsStringSync().trim();
     final dartFile = File(join(root, 'bin/cache/dart-sdk/version'));
-    final dart = dartFile.existsSync()
-        ? dartFile.readAsStringSync().trim()
-        : null;
+    final dart =
+        dartFile.existsSync() ? dartFile.readAsStringSync().trim() : null;
     return (flutter: flutter, dart: dart);
   }
   return (flutter: null, dart: null);

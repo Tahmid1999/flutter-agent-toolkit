@@ -63,8 +63,7 @@ Future<ProcessResult> runDart(List<String> args, {String? cwd}) {
   );
 }
 
-const dartMissing =
-    "flutter-agent-toolkit: could not run 'dart'. "
+const dartMissing = "flutter-agent-toolkit: could not run 'dart'. "
     "Add your Flutter SDK's bin folder to PATH to enable Flutter checks.";
 
 /// Prints a message the user sees in the transcript.

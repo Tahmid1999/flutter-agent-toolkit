@@ -1,0 +1,21 @@
+name: flutter_agent_toolkit
+description: Makes AI coding agents write modern, analyzer-clean Flutter. Installs the Claude Code plugin and adds a CLI that catches deprecated and team-banned Flutter APIs.
+version: 0.3.0
+homepage: https://github.com/Tahmid1999/flutter-agent-toolkit
+repository: https://github.com/Tahmid1999/flutter-agent-toolkit
+issue_tracker: https://github.com/Tahmid1999/flutter-agent-toolkit/issues
+topics:
+  - flutter
+  - ai
+  - lints
+  - cli
+  - claude
+
+environment:
+  sdk: ^3.5.0
+
+executables:
+  flutter_agent_toolkit:
+
+# No dependencies on purpose: the Claude Code hooks run straight from this
+# folder with only the Dart SDK, even offline.

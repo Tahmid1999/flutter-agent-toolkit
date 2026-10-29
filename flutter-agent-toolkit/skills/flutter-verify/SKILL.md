@@ -8,7 +8,7 @@ argument-hint: "[screen widget or file, default: screens changed this session]"
 
 You cannot see the app. This skill gives you screenshots and layout errors so you can check UI work before calling it done.
 
-The template [flutter_verify_test.dart](flutter_verify_test.dart) is in this skill's base directory.
+The template [flutter_verify_test.dart.tmpl](flutter_verify_test.dart.tmpl) is in this skill's base directory. Copy it to a `.dart` file in the app's `test/` folder (the `.tmpl` extension only keeps it out of this plugin's own analysis).
 
 ## Steps
 

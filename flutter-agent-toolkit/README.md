@@ -62,12 +62,56 @@ banned_apis:
 
 ## Install
 
+**Option A: from pub.dev**
+
+```bash
+dart pub global activate flutter_agent_toolkit
+flutter_agent_toolkit install
+```
+
+**Option B: inside Claude Code**
+
 ```
 /plugin marketplace add Tahmid1999/flutter-agent-toolkit
 /plugin install flutter-agent-toolkit@flutter-agent-plugins
 ```
 
 Then start a new session in a Flutter project. Run `/flutter-init` once per project.
+
+## CLI: use it in CI or with any AI agent
+
+The same rules engine also runs as a command, which helps when you use Cursor, Copilot, another agent, or want a CI gate:
+
+```bash
+dart pub global activate flutter_agent_toolkit
+
+flutter_agent_toolkit check          # deprecated + banned API scan, then dart analyze; exits 1 on problems
+flutter_agent_toolkit check --no-analyze   # fast scan only
+flutter_agent_toolkit init           # create .flutter-toolkit.yaml
+flutter_agent_toolkit info           # show the detected Flutter stack
+```
+
+Example output:
+
+```
+lib/features/profile/profile_screen.dart
+  line 9  [banned] Use the app logger instead of print.
+  line 11  [deprecated] .withOpacity(x) is deprecated. Use .withValues(alpha: x).
+  line 10  [warning] The value of the local variable 'unused' isn't used. (unused_local_variable)
+
+3 problems in 1 file.
+```
+
+GitHub Actions:
+
+```yaml
+- run: dart pub global activate flutter_agent_toolkit
+- run: flutter_agent_toolkit check
+```
+
+Tell another agent to run `flutter_agent_toolkit check` before it says it's done. In Cursor, add that to `.cursor/rules`.
+
+The rules engine is also a Dart library: `import 'package:flutter_agent_toolkit/flutter_agent_toolkit.dart';` (see the [example](example/example.dart)).
 
 ## How it stays fast
 
@@ -79,22 +123,4 @@ Everything runs locally. The plugin sends nothing anywhere.
 
 ## Changelog
 
-**0.2.1** (fixes from the first live agent-session test)
-- Hook messages are short: the launcher moved to `hooks/run.sh`
-- `/flutter-init` marks recommended vs optional rules and writes a folder-structure template for fresh apps
-- `flutter-verify` reads fewer screenshots (failing shots plus phone and desktop), so it uses fewer tokens
-- The verify template uses `debugPrint`, so team `print` rules don't flag it
-
-**0.2.0**
-- Project autodetect at session start
-- Per-edit check is now instant; analysis runs once when the agent finishes, with up to 3 automatic fix rounds
-- Auto build_runner and auto format
-- Team config file with banned APIs and strictness
-- Summary line with an all-time counter
-- `flutter-verify` skill: screenshots and overflow detection
-- `/flutter-init` command
-- Deprecated-API scan ignores strings and comments
-- Clear message when `dart` is not on PATH
-
-**0.1.0**
-- First release: post-edit analyze hook, modern-flutter and flutter-build-fixer skills, `/flutter-check`
+See [CHANGELOG.md](CHANGELOG.md).

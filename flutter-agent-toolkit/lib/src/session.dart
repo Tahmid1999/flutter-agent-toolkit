@@ -18,10 +18,10 @@ class SessionLog {
   late final File _rounds;
 
   void add(List<String> fields) => _log.writeAsStringSync(
-    '${fields.join('\t')}\n',
-    mode: FileMode.append,
-    flush: true,
-  );
+        '${fields.join('\t')}\n',
+        mode: FileMode.append,
+        flush: true,
+      );
 
   void recordEdit(String path) => add(['edit', path]);
   void recordCodegen(String path) => add(['codegen', path]);

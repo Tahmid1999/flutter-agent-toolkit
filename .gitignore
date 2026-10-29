@@ -2,3 +2,6 @@
 *.exe
 .DS_Store
 Thumbs.db
+
+# Dart package
+flutter-agent-toolkit/pubspec.lock

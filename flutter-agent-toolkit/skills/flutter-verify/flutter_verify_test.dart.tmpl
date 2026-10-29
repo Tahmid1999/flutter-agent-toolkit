@@ -69,9 +69,9 @@ void main() {
             darkTheme: darkTheme(),
             themeMode: shot.dark ? ThemeMode.dark : ThemeMode.light,
             builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                textScaler: TextScaler.linear(shot.textScale),
-              ),
+              data: MediaQuery.of(
+                context,
+              ).copyWith(textScaler: TextScaler.linear(shot.textScale)),
               child: child!,
             ),
             home: buildScreen(),

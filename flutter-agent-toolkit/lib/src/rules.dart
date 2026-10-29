@@ -6,35 +6,34 @@ import 'util.dart';
 const deprecatedApis = <String, String>{
   r'\.withOpacity\(':
       '.withOpacity(x) is deprecated. Use .withValues(alpha: x).',
-  r'\bWillPopScope\b':
-      'WillPopScope is deprecated. Use PopScope(canPop: ..., '
+  r'\bWillPopScope\b': 'WillPopScope is deprecated. Use PopScope(canPop: ..., '
       'onPopInvokedWithResult: (didPop, result) {...}).',
   r'\bonPopInvoked\s*:':
       'onPopInvoked is deprecated. Use onPopInvokedWithResult: '
-      '(didPop, result) {...}.',
+          '(didPop, result) {...}.',
   r'\bMaterialStateProperty':
       'MaterialStateProperty* is deprecated. Use WidgetStateProperty* '
-      '(same API).',
+          '(same API).',
   r'\bMaterialState\.': 'MaterialState is deprecated. Use WidgetState.',
   r'\btextScaleFactor\b':
       'textScaleFactor is deprecated. Use textScaler: TextScaler.linear(x) '
-      'or MediaQuery.textScalerOf(context).',
+          'or MediaQuery.textScalerOf(context).',
   r'colorScheme\.background\b':
       'ColorScheme.background is deprecated. Use colorScheme.surface.',
   r'colorScheme\.onBackground\b':
       'ColorScheme.onBackground is deprecated. Use colorScheme.onSurface.',
   r'colorScheme\.surfaceVariant\b':
       'ColorScheme.surfaceVariant is deprecated. Use '
-      'colorScheme.surfaceContainerHighest.',
+          'colorScheme.surfaceContainerHighest.',
   r'textTheme\.(headline[1-6]|subtitle[12]|bodyText[12]|caption|button|overline)\b':
       'Old TextTheme names were removed. Use displayLarge/Medium/Small, '
-      'headlineMedium/Small, titleLarge/Medium/Small, bodyLarge/Medium/'
-      'Small, labelLarge/Small.',
+          'headlineMedium/Small, titleLarge/Medium/Small, bodyLarge/Medium/'
+          'Small, labelLarge/Small.',
   r'\b(RaisedButton|FlatButton|OutlineButton)\b':
       'Removed widget. Use ElevatedButton, TextButton or OutlinedButton.',
   r'Scaffold\.of\([^)]*\)\.showSnackBar':
       'Scaffold.of(context).showSnackBar was removed. Use '
-      'ScaffoldMessenger.of(context).showSnackBar.',
+          'ScaffoldMessenger.of(context).showSnackBar.',
   r'\bButtonBar\b': 'ButtonBar is deprecated. Use OverflowBar.',
 };
 
@@ -149,9 +148,8 @@ String maskNonCode(String src) {
 
 String findingsReport(String path, List<Finding> findings, {int max = 25}) {
   final shown = findings.take(max).join('\n');
-  final more = findings.length > max
-      ? '\n...and ${findings.length - max} more.'
-      : '';
+  final more =
+      findings.length > max ? '\n...and ${findings.length - max} more.' : '';
   return 'flutter-agent-toolkit: $path has ${plural(findings.length, 'problem')}. '
       'Fix before moving on.\n$shown$more';
 }

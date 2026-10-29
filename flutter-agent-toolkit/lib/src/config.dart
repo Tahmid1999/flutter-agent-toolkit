@@ -19,6 +19,24 @@ class BannedApi {
       !exclude.any(relPath.startsWith);
 }
 
+/// Starting `.flutter-toolkit.yaml` written by `flutter_agent_toolkit init`.
+const defaultConfigYaml = r'''
+# flutter-agent-toolkit settings. All keys are optional.
+strictness: warnings      # errors | warnings | all
+auto_format: true         # dart format changed files when the agent finishes
+auto_build_runner: true   # run build_runner when annotated files change
+check_deprecated: true    # flag deprecated Flutter APIs after each edit
+max_fix_rounds: 3         # times the agent is sent back to fix problems (0 = report only)
+summary: true             # show the "Flutter toolkit ✓" line after each turn
+ignore_codes: []          # analyzer codes to ignore, e.g. [todo]
+
+# Team rules. pattern is a regex matched against code (not strings or comments).
+banned_apis:
+  - pattern: '\bprint\('
+    message: Use the app logger instead of print.
+    exclude: [test/, tool/]
+''';
+
 /// Per-project settings from `.flutter-toolkit.yaml` at the project root.
 /// Every key is optional.
 class ToolkitConfig {
@@ -100,8 +118,8 @@ class ToolkitConfig {
     List<String> list(Object? v) => v is List
         ? v.map((e) => '$e').toList()
         : v is String
-        ? [v]
-        : [];
+            ? [v]
+            : [];
     bannedApis.add(
       BannedApi(
         pattern,
@@ -198,9 +216,7 @@ Object? _parseScalar(String v) {
     return v.substring(1, v.length - 1).replaceAll("''", "'");
   }
   if (v.startsWith('"') && v.endsWith('"') && v.length >= 2) {
-    return v
-        .substring(1, v.length - 1)
-        .replaceAllMapped(
+    return v.substring(1, v.length - 1).replaceAllMapped(
           RegExp(r'\\(.)'),
           (m) => switch (m[1]) {
             'n' => '\n',
